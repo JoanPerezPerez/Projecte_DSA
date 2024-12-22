@@ -3,6 +3,7 @@ package edu.upc.dsa;
 import edu.upc.dsa.exceptions.*;
 import edu.upc.dsa.models.ChatIndividual;
 import edu.upc.dsa.models.Forum;
+import edu.upc.dsa.models.Insignia;
 import edu.upc.dsa.models.User;
 
 import java.util.List;
@@ -48,4 +49,9 @@ public interface UserManager {
     public List<ChatIndividual> getChatsIndividuales(String nombre1, String nombre2);
 
     public List<User> dameUsuariosConLosQueMantengoChatIndividual(String name);
+
+    public void ponInsigniaParaUsuario(Insignia insignia, User u);
+
+    public List<Insignia> getAllInsignias(User u);
+
 }

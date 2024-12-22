@@ -1,11 +1,10 @@
 package edu.upc.dsa;
 
 import edu.upc.dsa.exceptions.*;
-import edu.upc.dsa.models.ChatIndividual;
-import edu.upc.dsa.models.Forum;
-import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.*;
 import edu.upc.dsa.orm.FactorySession;
 import edu.upc.dsa.orm.SessionBD;
+import edu.upc.dsa.orm.util.ObjectHelper;
 import edu.upc.dsa.util.RandomUtils;
 import org.apache.log4j.Logger;
 
@@ -15,6 +14,12 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.*;
 
 
@@ -270,5 +275,51 @@ public class UserManagerImplBBDD implements UserManager {
         respuesta.sort(Comparator.comparingInt(ChatIndividual::getID));
         return respuesta;
     };
+
+    public void ponInsigniaParaUsuario(Insignia insignia, User user){
+        sessionBD.save(insignia);
+        Insignia i = (Insignia) sessionBD.get(Insignia.class, "name", insignia.getName());
+        User u = (User) sessionBD.get(User.class,"name",user.getName());
+        sessionBD.save(new InsigniaRelaciones(u.getID(),i.getID()));
+    }
+
+    public List<Insignia> getAllInsignias(User user){
+        try{
+            List<Insignia> respuesta = new ArrayList<>();
+            Connection con = sessionBD.dameConnection();
+            User u = (User) sessionBD.get(User.class, "name", user.getName());
+            String query = "SELECT Insignia.* FROM Insignia JOIN Insigniarelaciones ON Insignia.ID = InsigniaRelaciones.ID_Insignia WHERE InsigniaRelaciones.ID_User = "+u.getID() +";";
+            PreparedStatement pstm = null;
+            pstm = con.prepareStatement(query);
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                ResultSetMetaData rsmd = res.getMetaData();
+
+                int numColumns = rsmd.getColumnCount();
+                int i = 1;
+                Insignia in = new Insignia();
+                while (i < numColumns + 1) {
+                    String key = rsmd.getColumnName(i);
+                    Object value = res.getObject(i);
+                    if (key.equals("money") || key.equals("cobre")){
+                        BigDecimal value1 = (BigDecimal) value;
+                        value = value1.setScale(2, RoundingMode.DOWN).doubleValue(); // Truncar a 2 decimals
+                    }
+                    ObjectHelper.setter(in, key, value);
+                    i++;
+                }
+                respuesta.add(in);
+            }
+            if(respuesta.isEmpty()) {
+                logger.warn("Attention, no insignia found");
+                return null;
+            }
+            return respuesta;
+        }
+        catch(Exception ex){
+            logger.warn("Attention, Exception in the getAllInsignias query");
+            return null;
+        }
+    }
 
 }

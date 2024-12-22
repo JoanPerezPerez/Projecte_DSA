@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface SessionBD {
+    public Connection dameConnection();
+
     public void save(Object entity); //FUNCIONA
     //Simplement amb possar l'objecte ja ho guarda a la basse corresponent,
     public void close();

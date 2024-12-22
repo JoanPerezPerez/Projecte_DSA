@@ -87,7 +87,7 @@ public class ORMTEST {
     @Test
     public void TestGet(){
         SessionBD session = FactorySession.openSession(); //url, user, password);
-        User u5 = (User)session.get(u1.getClass(), "ID",45);
+        User u5 = (User)session.get(u1.getClass(), "ID",8);
         User u6 = (User)session.get(u1.getClass(),"name", "Marcel");
     }
 
@@ -207,6 +207,28 @@ public class ORMTEST {
         condiciones.put("nameTo =  ","Blau");
         List<ChatIndividual> respuesta = (List<ChatIndividual>) session.findAllWithConditionsAND(ChatIndividual.class, condiciones);
         int k = 12;
+    }
+
+    @Test
+    public void SaveInsignias(){
+        Insignia i1 = new Insignia("La Maeb", "https://i.pinimg.com/originals/c2/2d/e7/c22de70eb605ed38f515f3c08a427dc7.webp");
+        Insignia i2 = new Insignia("El Churumbel De Malaga", "https://s2.abcstatics.com/abc/www/multimedia/espana/2023/07/11/churumbel-malaga-hospital-RfYEGPIUEO9sIrPJZd5ttLL-1200x840@abc.jpg");
+        Insignia i3 = new Insignia("La falete", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu_eIt0CwiBPa0QCe6rnoWXdqPuYzyRgq0SQ&s");
+        SessionBD session = FactorySession.openSession();
+        session.save(i1);
+        session.save(i2);
+        session.save(i3);
+    }
+
+    @Test
+    public void SaveInsigniaRelation(){
+        InsigniaRelaciones i1 = new InsigniaRelaciones(4,1);
+        InsigniaRelaciones i2 = new InsigniaRelaciones(4,2);
+        InsigniaRelaciones i3 = new InsigniaRelaciones(4,3);
+        SessionBD session = FactorySession.openSession();
+        session.save(i1);
+        session.save(i2);
+        session.save(i3);
     }
 
 }

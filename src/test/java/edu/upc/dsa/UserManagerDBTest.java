@@ -2,6 +2,7 @@ package edu.upc.dsa;
 
 import edu.upc.dsa.exceptions.*;
 import edu.upc.dsa.models.ChatIndividual;
+import edu.upc.dsa.models.Insignia;
 import edu.upc.dsa.models.Item;
 import edu.upc.dsa.models.User;
 import edu.upc.dsa.orm.FactorySession;
@@ -175,5 +176,18 @@ public class UserManagerDBTest {
         ChatIndividual chat = new ChatIndividual("Lluc","Marcel","Hola tu 6");
         List<ChatIndividual> chats = this.um.ponComentarioEnChatPrivado(chat);
         int k = 12;
+    }
+
+    @Test
+    public void DameInsigniasUser(){
+        User u1 = new User("Marcel", "12345","marcel.guim@estudiantat.upc.edu");
+        List<Insignia> respuesta = this.um.getAllInsignias(u1);
+    }
+
+    @Test
+    public void GuardaInsigniaUsuario(){
+        Insignia i1 = new Insignia("El Misha","https://cdn.diariodeavisos.com/wp-content/uploads/2023/06/cats-26-1024x750.jpg");
+        User u1 = new User("Marcel", "12345","marcel.guim@estudiantat.upc.edu");
+        this.um.ponInsigniaParaUsuario(i1,u1);
     }
 }

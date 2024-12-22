@@ -3,6 +3,7 @@ package edu.upc.dsa;
 import edu.upc.dsa.exceptions.*;
 import edu.upc.dsa.models.ChatIndividual;
 import edu.upc.dsa.models.Forum;
+import edu.upc.dsa.models.Insignia;
 import edu.upc.dsa.models.User;
 
 import java.io.File;
@@ -260,4 +261,11 @@ public class UserManagerImpl implements UserManager {
         return null;
     }
 
+    public void ponInsigniaParaUsuario(Insignia insignia, User u){
+
+    }
+
+    public List<Insignia> getAllInsignias(User u){
+        return null;
+    }
 }

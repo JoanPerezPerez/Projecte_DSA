@@ -559,4 +559,51 @@ public class UserServiceBBDD {
             return Response.status(506).build();
         }
     }
+    @POST
+    @ApiOperation(value = "Get Insignias", notes = "hello")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response= Insignia.class, responseContainer = "List"),
+            @ApiResponse(code = 500, message = "Error"),
+            @ApiResponse(code = 502, message = "No Forum Messages"),
+            @ApiResponse(code = 506, message = "User Not logged in yet"),
+    })
+    @Path("/{NameUser}/badges") //El identificador de usuario es la propia Cookie
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response GetInsignias(@CookieParam("authToken") String authToken, @PathParam("NameUser") String NameUser) {
+        try{
+            User u = this.sesm.getSession(authToken);
+            List<Insignia> respuesta = this.um.getAllInsignias(u);
+            GenericEntity<List<Insignia>> entity = new GenericEntity<List<Insignia>>(respuesta) {};
+            return Response.status(201).entity(entity).build();
+        }
+        catch (UserNotLoggedInException ex){
+            logger.warn("Attention, user not logged in yet");
+            return Response.status(506).build();
+        }
+    }
+
+    @POST
+    @ApiOperation(value = "Post Insignias", notes = "hello")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response= Insignia.class, responseContainer = "List"),
+            @ApiResponse(code = 500, message = "Error"),
+            @ApiResponse(code = 502, message = "No Forum Messages"),
+            @ApiResponse(code = 506, message = "User Not logged in yet"),
+    })
+    @Path("/{NameUser}/save/badges") //El identificador de usuario es la propia Cookie
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response PostInsignias(@CookieParam("authToken") String authToken, @PathParam("NameUser") String NameUser, Insignia insignia) {
+        try{
+            User u = this.sesm.getSession(authToken);
+            this.um.ponInsigniaParaUsuario(insignia,u);
+            List<Insignia> respuesta = this.um.getAllInsignias(u);
+            GenericEntity<List<Insignia>> entity = new GenericEntity<List<Insignia>>(respuesta) {};
+            return Response.status(201).entity(entity).build();
+        }
+        catch (UserNotLoggedInException ex){
+            logger.warn("Attention, user not logged in yet");
+            return Response.status(506).build();
+        }
+    }
+
 }
