@@ -257,8 +257,12 @@ public class UserManagerImplBBDD implements UserManager {
     }
 
     public List<ChatIndividual> ponComentarioEnChatPrivado(ChatIndividual chatIndividual){
-        sessionBD.save(chatIndividual);
-        return this.getChatsIndividuales(chatIndividual.getNameFrom(), chatIndividual.getNameTo());
+        List<User> users = (List<User>) sessionBD.findAll(User.class);
+        for(User u:users) if(u.getName().equals(chatIndividual.getNameTo())){
+            sessionBD.save(chatIndividual);
+            return this.getChatsIndividuales(chatIndividual.getNameFrom(), chatIndividual.getNameTo());
+        }
+        return null;
     };
 
     public List<ChatIndividual> getChatsIndividuales(String nombre1, String nombre2){

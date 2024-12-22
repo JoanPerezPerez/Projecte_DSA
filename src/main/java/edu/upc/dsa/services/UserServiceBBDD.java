@@ -515,7 +515,7 @@ public class UserServiceBBDD {
     }
 
     @POST
-    @ApiOperation(value = "Get Private Messages With Someone ", notes = "hello")
+    @ApiOperation(value = "Get Private Messages With Someone", notes = "hello")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response= String.class, responseContainer = "List"),
             @ApiResponse(code = 500, message = "Error"),
@@ -542,7 +542,7 @@ public class UserServiceBBDD {
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response= String.class, responseContainer = "List"),
             @ApiResponse(code = 500, message = "Error"),
-            @ApiResponse(code = 502, message = "No Forum Messages"),
+            @ApiResponse(code = 502, message = "Error in the creation of the chat"),
             @ApiResponse(code = 506, message = "User Not logged in yet"),
     })
     @Path("/PrivateChat/Post")
@@ -551,6 +551,7 @@ public class UserServiceBBDD {
         try{
             User u = this.sesm.getSession(authToken);
             List<ChatIndividual>respuesta = this.um.ponComentarioEnChatPrivado(chat);
+            if(respuesta == null) return Response.status(502).build();
             GenericEntity<List<ChatIndividual>> entity = new GenericEntity<List<ChatIndividual>>(respuesta) {};
             return Response.status(201).entity(entity).build();
         }
