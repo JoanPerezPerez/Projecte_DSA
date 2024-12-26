@@ -35,8 +35,8 @@ public class Main {
 
         BeanConfig beanConfig = new BeanConfig();
 
-        beanConfig.setHost("147.83.7.204");  //PRODUCCION
-        //beanConfig.setHost("localhost:8080"); //LOCAL
+        //beanConfig.setHost("147.83.7.204");  //PRODUCCION
+        beanConfig.setHost("localhost:8080"); //LOCAL
         beanConfig.setBasePath("/RobaCobres");
         beanConfig.setContact("support@example.com");
         beanConfig.setDescription("REST API for RobaCobres");

@@ -85,7 +85,7 @@ public class StoreServiceBBDD {
     })
     @Path("Items")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsers(@CookieParam("authToken") String authToken) {
+    public Response getItems(@CookieParam("authToken") String authToken) {
         try{
             User u = this.sesm.getSession(authToken);
             List<Item> items = this.sm.getItemUser(u.getName());
@@ -101,6 +101,9 @@ public class StoreServiceBBDD {
         catch(UserNotLoggedInException ex){
             logger.warn("Attention, user not logged in yet");
             return Response.status(506).build();
+        }
+        catch (Exception ex){
+            return Response.status(500).build();
         }
     }
     @POST
@@ -152,16 +155,15 @@ public class StoreServiceBBDD {
             @ApiResponse(code = 501, message = "User not found"),
             @ApiResponse(code = 502, message = "User has no Characters"),
             @ApiResponse(code = 506, message = "User not logged in yet"),
-    })
-    @Path("Characters/{NameUser}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCharacters(@PathParam("NameUser") String NameUser, @CookieParam("authToken") String authToken) {
-        if(NameUser == null) return Response.status(500).build();
 
+    })
+    @Path("Characters")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCharacters(@CookieParam("authToken") String authToken) {
         try{
-            this.sesm.getSession(authToken);
-            List<GameCharacter> gameCharacters = this.sm.getCharacterUser(NameUser);
-            GenericEntity<List<GameCharacter>> entity = new GenericEntity<List<GameCharacter>>(gameCharacters) {};
+            User u = this.sesm.getSession(authToken);
+            List<GameCharacter> characters = this.sm.getCharacterUser(u.getName());
+            GenericEntity<List<GameCharacter>> entity = new GenericEntity<List<GameCharacter>>(characters) {};
             return Response.status(201).entity(entity).build();
         }
         catch(UserNotFoundException ex){
@@ -174,6 +176,10 @@ public class StoreServiceBBDD {
             logger.warn("Attention, user not logged in yet");
             return Response.status(506).build();
         }
+        catch (Exception ex){
+            return Response.status(500).build();
+        }
+
     }
 
     @GET

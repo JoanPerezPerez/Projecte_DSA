@@ -9,7 +9,7 @@ public class DBUtils {
     public static final String DB_NAME = "robacobresdb";
     public static final String DB_HOST = "127.0.0.1";
     public static final String DB_USER = "root";
-    public static final String DB_PASS = "19223434";
+    public static final String DB_PASS = "blau";
     public static final String DB_PORT = "3306";
 
     public static String getDb() {
