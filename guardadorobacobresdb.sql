@@ -17,9 +17,55 @@
 /*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 --
+-- Table structure for table `chatindividual`
+--
+
+DROP TABLE IF EXISTS `chatindividual`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chatindividual` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `nameFrom` varchar(255) NOT NULL,
+  `nameTo` varchar(255) NOT NULL,
+  `comentario` varchar(2500) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chatindividual`
+--
+
+LOCK TABLES `chatindividual` WRITE;
+/*!40000 ALTER TABLE `chatindividual` DISABLE KEYS */;
+/*!40000 ALTER TABLE `chatindividual` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `forum`
+--
+
+DROP TABLE IF EXISTS `forum`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forum` (
+  `name` varchar(255) NOT NULL,
+  `comentario` varchar(2500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `forum`
+--
+
+LOCK TABLES `forum` WRITE;
+/*!40000 ALTER TABLE `forum` DISABLE KEYS */;
+/*!40000 ALTER TABLE `forum` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `gamecharacter`
 --
-USE robacobresdb;
 
 DROP TABLE IF EXISTS `gamecharacter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -45,6 +91,57 @@ INSERT INTO `gamecharacter` VALUES
 (2,'segon',60,1,1),
 (3,'tercer',50,1,1);
 /*!40000 ALTER TABLE `gamecharacter` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `insignia`
+--
+
+DROP TABLE IF EXISTS `insignia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `insignia` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `selected` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `insignia`
+--
+
+LOCK TABLES `insignia` WRITE;
+/*!40000 ALTER TABLE `insignia` DISABLE KEYS */;
+/*!40000 ALTER TABLE `insignia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `insigniarelaciones`
+--
+
+DROP TABLE IF EXISTS `insigniarelaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `insigniarelaciones` (
+  `ID_User` int(11) DEFAULT NULL,
+  `ID_Insignia` int(11) DEFAULT NULL,
+  KEY `ID_User` (`ID_User`),
+  KEY `ID_Insignia` (`ID_Insignia`),
+  CONSTRAINT `insigniarelaciones_ibfk_1` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID`),
+  CONSTRAINT `insigniarelaciones_ibfk_2` FOREIGN KEY (`ID_Insignia`) REFERENCES `insignia` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `insigniarelaciones`
+--
+
+LOCK TABLES `insigniarelaciones` WRITE;
+/*!40000 ALTER TABLE `insigniarelaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `insigniarelaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -93,7 +190,7 @@ CREATE TABLE `partidas` (
   PRIMARY KEY (`ID`),
   KEY `ID_Jugador` (`ID_Jugador`),
   CONSTRAINT `partidas_ibfk_1` FOREIGN KEY (`ID_Jugador`) REFERENCES `user` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,6 +199,15 @@ CREATE TABLE `partidas` (
 
 LOCK TABLES `partidas` WRITE;
 /*!40000 ALTER TABLE `partidas` DISABLE KEYS */;
+INSERT INTO `partidas` VALUES
+(1,1,100),
+(2,1,200),
+(3,2,150),
+(4,2,250),
+(7,4,400),
+(8,4,500),
+(9,6,500),
+(10,3,150);
 /*!40000 ALTER TABLE `partidas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +226,7 @@ CREATE TABLE `user` (
   `money` decimal(10,2) DEFAULT NULL,
   `cobre` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,10 +236,11 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES
-(1,'Blau','Blau2002','emailBlau',0.00,0.00),
-(2,'Lluc','Falco12','emailLluc',0.00,0.00),
+(1,'Blau','Blau2002','maria.blau.camarasa@estudiantat.upc.edu',1000.00,1000.00),
+(2,'Lluc','Falco12','joan.lluc.fernandez@estudiantat.upc.edu',1000.00,1000.00),
+(3,'David','123','david.arenas.romero@estudiantat.upc.edu',1000.00,100.50),
 (4,'Marcel','123','marcel.guim@estudiantat.upc.edu',1723.70,1426.00),
-(6,'Joan','123','12',0.00,0.00);
+(6,'Joan','123','joan.perez.p@estudiantat.upc.edu',1000.00,1000.00);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,6 +284,35 @@ INSERT INTO `useritemcharacterrelation` VALUES
 (4,3,NULL);
 /*!40000 ALTER TABLE `useritemcharacterrelation` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `video`
+--
+
+DROP TABLE IF EXISTS `video`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `video` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `video`
+--
+
+LOCK TABLES `video` WRITE;
+/*!40000 ALTER TABLE `video` DISABLE KEYS */;
+INSERT INTO `video` VALUES
+(1,'Normas de juego','https://www.youtube.com/watch?v=oMfuX_bhrDw'),
+(2,'Guardado de partida','https://www.youtube.com/watch?v=FvVoBFxtHC8'),
+(3,'Recuperar vidas','https://www.youtube.com/watch?v=79fzeNUqQbQ'),
+(4,'Como ganar dinero','https://www.youtube.com/watch?v=zpzdgmqIHOQ');
+/*!40000 ALTER TABLE `video` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -187,4 +323,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2024-12-12 13:38:20
+-- Dump completed on 2024-12-29 19:07:28

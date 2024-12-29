@@ -607,4 +607,123 @@ public class UserServiceBBDD {
         }
     }
 
+    @GET
+    @ApiOperation(value = "Get Max Puntuacion", notes = "hello")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = String.class),
+            @ApiResponse(code = 500, message = "Error"),
+            @ApiResponse(code = 502, message = "No data available"),
+            @ApiResponse(code = 508, message = "Error in query"),
+    })
+    @Path("/GetMaxPuntuacion")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMaxPuntuacion( @CookieParam("authToken") String authToken) {
+        try{
+            User u = this.sesm.getSession(authToken);
+            String p = this.um.getPartidasMaxPuntuacion(u);
+            return Response.status(201).entity(p).build();
+        }
+        catch (QueryErrorException ex) {
+            logger.warn("Attention, error in query");
+            return Response.status(508).build();
+        }
+        catch (NoDataException ex) {
+            logger.warn("Attention, no data available");
+            return Response.status(502).build();
+        }
+        catch (Exception ex)
+        {
+            return Response.status(500).build();
+        }
+    }
+
+    @GET
+    @ApiOperation(value = "Get Ranking", notes = "hello")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Ranking.class, responseContainer = "List"),
+            @ApiResponse(code = 500, message = "Error"),
+            @ApiResponse(code = 502, message = "No data available"),
+            @ApiResponse(code = 508, message = "Error in query"),
+
+    })
+    @Path("/GetRanking")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRanking( @CookieParam("authToken") String authToken) {
+        try{
+            this.sesm.getSession(authToken);
+            List<Ranking> respuesta = this.um.getRanking();
+            GenericEntity<List<Ranking>> entity = new GenericEntity<List<Ranking>>(respuesta) {};
+            return Response.status(201).entity(entity).build();
+        }
+        catch (QueryErrorException ex) {
+            logger.warn("Attention, error in query");
+            return Response.status(508).build();
+        }
+        catch (NoDataException ex) {
+            logger.warn("Attention, no data available");
+            return Response.status(502).build();
+        }
+        catch (Exception ex)
+        {
+            return Response.status(500).build();
+        }
+    }
+
+    @GET
+    @ApiOperation(value = "Get Mail ranking", notes = "hello")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 500, message = "Error"),
+            @ApiResponse(code = 506, message = "User Not logged in yet"),
+    })
+    @Path("/GetMailRanking")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMailRanking( @CookieParam("authToken") String authToken) {
+        try{
+            User u = this.sesm.getSession(authToken);
+            this.um.SendRanking(u);
+            return Response.status(201).build();
+        }
+        catch (UserNotLoggedInException ex) {
+            logger.warn("Attention, user not logged in yet");
+            return Response.status(506).build();
+        }
+        catch (Exception ex)
+        {
+            return Response.status(500).build();
+        }
+    }
+
+    @GET
+    @ApiOperation(value = "get all media", notes = "hello")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Video.class, responseContainer="List"),
+            @ApiResponse(code = 500, message = "Error"),
+            @ApiResponse(code = 502, message = "No data available"),
+            @ApiResponse(code = 508, message = "Error in query"),
+    })
+    @Path("/media")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMedia(@CookieParam("authToken") String authToken) {
+        try{
+            this.sesm.getSession(authToken);
+            List<Video> respuesta = this.um.getmedia();
+            GenericEntity<List<Video>> entity = new GenericEntity<List<Video>>(respuesta) {};
+            return Response.status(201).entity(entity).build();
+        }
+        catch (QueryErrorException ex) {
+            logger.warn("Attention, error in query");
+            return Response.status(508).build();
+        }
+        catch (NoDataException ex) {
+            logger.warn("Attention, no data available");
+            return Response.status(502).build();
+        }
+        catch (Exception ex)
+        {
+            return Response.status(500).build();
+        }
+
+    }
+
 }

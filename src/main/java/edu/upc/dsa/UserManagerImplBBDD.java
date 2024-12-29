@@ -325,5 +325,86 @@ public class UserManagerImplBBDD implements UserManager {
             return null;
         }
     }
+    public String getPartidasMaxPuntuacion(User user) throws QueryErrorException, NoDataException{
+        String query = "SELECT * FROM Partidas WHERE ID_Jugador = "+ user.getID() +" AND PuntuacionMax = ( SELECT MAX(PuntuacionMax) FROM Partidas WHERE ID_Jugador = "+ user.getID() +")";
+        List<Partidas> respuesta = (List<Partidas>)sessionBD.query(query,Partidas.class);
+        if(respuesta == null) throw new QueryErrorException();
+        if(respuesta.isEmpty()) throw new NoDataException();
+        String puntuacionMax = String.valueOf(respuesta.get(0).getPuntuacionMax());
+        return puntuacionMax;
+    }
+    public List<Ranking> getRanking() throws QueryErrorException, NoDataException {
+        String query = "SELECT User.name AS UserName, Partidas.PuntuacionMax AS MaxPuntuacion FROM Partidas JOIN User ON User.ID = Partidas.ID_Jugador WHERE (Partidas.ID_Jugador, Partidas.PuntuacionMax) IN ( SELECT ID_Jugador, MAX(PuntuacionMax) FROM Partidas GROUP BY ID_Jugador ) ORDER BY Partidas.PuntuacionMax DESC";
+        List<Ranking> respuesta = (List<Ranking>)sessionBD.query(query,Ranking.class);
+        if(respuesta == null) throw new QueryErrorException();
+        if(respuesta.isEmpty()) throw new NoDataException();
+        return respuesta;
+    }
+
+    public void SendRanking(User user) throws Exception{
+        String host = "smtp.gmail.com";
+        final String fromEmail = "correuperdsa@gmail.com";
+        final String password = "eqqq ymrx grbg htld";
+        User u1 = (User) sessionBD.get(user.getClass(),"correo", user.getCorreo());
+        String toEmail = u1.getCorreo();
+        Properties props = new Properties();
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        });
+
+        // Crear el missatge
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(fromEmail));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+        message.setSubject("Ranking");
+
+        // Cos del text del correu
+        MimeBodyPart textPart = new MimeBodyPart();
+        List<Ranking> ranking = getRanking();
+
+        // Construir contingut
+        if (ranking == null || ranking.isEmpty()) {
+            textPart.setText("No hay jugadores en el ranking.");
+        } else {
+            StringBuilder rankingTexto = new StringBuilder();
+            rankingTexto.append("Ranking de Jugadores:\n\n");
+
+            for (int i = 0; i < ranking.size(); i++) {
+                Ranking jugador = ranking.get(i);
+                rankingTexto.append(String.format("%d. %s - %.2f puntos\n",
+                        i + 1,
+                        jugador.getUsername(),
+                        jugador.getMaxpuntuacion()
+                ));
+            }
+
+            textPart.setText(rankingTexto.toString());
+        }
+
+        // Crear el contingut multipart
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(textPart); // Afegir el text
+
+        // Assignar el contingut al missatge
+        message.setContent(multipart);
+
+        // Enviar el correu
+        Transport.send(message);
+    }
+
+    public List<Video> getmedia() throws QueryErrorException, NoDataException {
+        List<Video> respuesta = (List<Video>)sessionBD.findAll(Video.class);
+        if(respuesta == null) throw new QueryErrorException();
+        if(respuesta.isEmpty()) throw new NoDataException();
+        return respuesta;
+    }
+
 
 }

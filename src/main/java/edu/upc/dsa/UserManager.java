@@ -1,10 +1,7 @@
 package edu.upc.dsa;
 
 import edu.upc.dsa.exceptions.*;
-import edu.upc.dsa.models.ChatIndividual;
-import edu.upc.dsa.models.Forum;
-import edu.upc.dsa.models.Insignia;
-import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.*;
 
 import java.util.List;
 
@@ -53,5 +50,13 @@ public interface UserManager {
     public void ponInsigniaParaUsuario(Insignia insignia, User u);
 
     public List<Insignia> getAllInsignias(User u);
+
+    public String getPartidasMaxPuntuacion(User user) throws QueryErrorException, NoDataException;
+
+    public List<Ranking> getRanking() throws QueryErrorException, NoDataException;
+
+    public void SendRanking(User user) throws Exception;
+
+    public List<Video> getmedia() throws QueryErrorException, NoDataException;
 
 }

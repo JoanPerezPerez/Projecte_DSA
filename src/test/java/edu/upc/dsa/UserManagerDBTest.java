@@ -1,10 +1,7 @@
 package edu.upc.dsa;
 
 import edu.upc.dsa.exceptions.*;
-import edu.upc.dsa.models.ChatIndividual;
-import edu.upc.dsa.models.Insignia;
-import edu.upc.dsa.models.Item;
-import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.*;
 import edu.upc.dsa.orm.FactorySession;
 import edu.upc.dsa.orm.SessionBD;
 import org.junit.After;
@@ -190,4 +187,5 @@ public class UserManagerDBTest {
         User u1 = new User("Marcel", "12345","marcel.guim@estudiantat.upc.edu");
         this.um.ponInsigniaParaUsuario(i1,u1);
     }
+
 }

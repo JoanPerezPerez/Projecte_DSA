@@ -1,10 +1,7 @@
 package edu.upc.dsa;
 
 import edu.upc.dsa.exceptions.*;
-import edu.upc.dsa.models.ChatIndividual;
-import edu.upc.dsa.models.Forum;
-import edu.upc.dsa.models.Insignia;
-import edu.upc.dsa.models.User;
+import edu.upc.dsa.models.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -266,6 +263,16 @@ public class UserManagerImpl implements UserManager {
     }
 
     public List<Insignia> getAllInsignias(User u){
+        return null;
+    }
+    public String getPartidasMaxPuntuacion(User user) throws QueryErrorException, NoDataException{
+        return null;
+    }
+    public List<Ranking> getRanking() throws QueryErrorException, NoDataException{
+        return null;
+    }
+    public void SendRanking(User user) throws Exception{}
+    public List<Video> getmedia() throws QueryErrorException, NoDataException{
         return null;
     }
 }

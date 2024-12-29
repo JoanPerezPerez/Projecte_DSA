@@ -277,8 +277,24 @@ public class SessionImpl implements SessionBD {
         }
     }
 
-    public List<Object> query(String query, Class theClass, HashMap params) {
-        return null;
+    public <T> List<T> query(String query,Class<T> theClass) {
+        try{
+            PreparedStatement pstm = null;
+            pstm = conn.prepareStatement(query);
+            ResultSet res = pstm.executeQuery();
+            ArrayList<String> fields = new ArrayList<>(Arrays.asList(ObjectHelper.getFieldsDirectlyClass(theClass)));
+            List<T> lists = new ArrayList<>();
+            while (res.next()) {
+                T o = theClass.newInstance();
+                for(String field: fields) ObjectHelper.setter(o, field, res.getObject(field));
+                lists.add(o);
+            }
+            return lists;
+        }
+        catch(Exception ex){
+            logger.warn("Error in the query: "+ ex);
+            return null;
+        }
     }
 
 

@@ -35,7 +35,7 @@ public interface SessionBD {
     //Per utilitzar-ho, cal indicar quina és el tipus que volem (theClass)
     //El HashMap conté Clau + valor (exemple--> nom,Pepito)
     //ATENCIÓ LA CLAU HA DE CONTENIR EL SÍMBOL QUE VOLEM, = < >...
-    public <T> List<T> query(String query, Class theClass, HashMap params);
+    public <T> List<T> query(String query,Class<T> theClass);
     //Per utilitzar-ho, cal indicar quina és el tipus que volem (theClass)
     //El HashMap conté Clau + valor (exemple--> nom,Pepito)
     //ATENCIÓ LA CLAU HA DE CONTENIR EL SÍMBOL QUE VOLEM, = < >...

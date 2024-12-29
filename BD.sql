@@ -75,3 +75,9 @@ CREATE TABLE InsigniaRelaciones(
     FOREIGN KEY (ID_User) REFERENCES User(ID),
     FOREIGN KEY (ID_Insignia) REFERENCES Insignia(ID)
 );
+
+CREATE TABLE Video (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL
+);
