@@ -248,9 +248,13 @@ public class UserManagerImplBBDD implements UserManager {
         List<ChatIndividual> respuesta1 = (List<ChatIndividual>) sessionBD.findAllWithConditionsOR(ChatIndividual.class, condiciones);
         List<String> nombres = new ArrayList<>();
         for (ChatIndividual chat : respuesta1) {
-            if(!nombres.contains(chat.getNameTo())){
+            if(!nombres.contains(chat.getNameTo()) && !chat.getNameTo().equals(name)){
                 respuesta.add(new User(chat.getNameTo(),null,null));
                 nombres.add(chat.getNameTo());
+            }
+            if(!nombres.contains(chat.getNameFrom()) && !chat.getNameFrom().equals(name)){
+                respuesta.add(new User(chat.getNameFrom(),null,null));
+                nombres.add(chat.getNameFrom());
             }
         }
         return respuesta;
