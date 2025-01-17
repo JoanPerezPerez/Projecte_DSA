@@ -37,22 +37,22 @@ public class GameService {
         this.sesm = SessionManager.getInstance();
     }
     @POST
-    @ApiOperation(value = "Hola check", notes = "hello")
+    @ApiOperation(value = "save", notes = "hello")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful"),
             @ApiResponse(code = 500, message = "Error")
     })
-    @Path("/state")
+    @Path("/save")
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response HolaEco(
+    public Response SaveGame(
             @CookieParam("authToken") String authToken,
-            String state // Directly accept the text body as a String
+            String level_actually// Directly accept the text body as a String
     ) {
         try {
             User u = this.sesm.getSession(authToken);
 
             // Now you can access the plain text data from the body
-            System.out.println("Received hola: " + state);
+            System.out.println("Received level: " + level_actually);
 
             // Perform any updates or actions based on the state
 
@@ -61,4 +61,34 @@ public class GameService {
             return Response.status(501).build();
         }
     }
+
+    //PETICIO GET PARTIDA
+
+
+    //SUMAR COBRE
+    @GET
+    @ApiOperation(value = "sumarcobre", notes = "hahaha")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "Track not found"),
+            @ApiResponse(code = 506, message = "User not logged in")
+    })
+    @Path("/addCobre/{Cobre}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addCobre(@PathParam("Cobre") String CobreAmount, @CookieParam("authToken") String authToken) {
+        try{
+            User u = this.sesm.getSession(authToken);
+            int cobreAdd=Integer.parseInt(CobreAmount);
+            logger.info(u.getName()+ " ha ganado: "+cobreAdd);
+            //POSAR LOGICA DE SUMAR COBRE A L'actual
+
+            return Response.status(201).build();
+        }
+        catch (UserNotLoggedInException ex){
+            logger.warn("Attention, User not logged in yet");
+            return Response.status(500).build();
+        }
+    }
+
+    //GET COBRE JA ESTA IMPLEMENTAT A USERSERVICEBBDDD
 }
