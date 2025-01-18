@@ -275,4 +275,9 @@ public class UserManagerImpl implements UserManager {
     public List<Video> getmedia() throws QueryErrorException, NoDataException{
         return null;
     }
+    public void guardarPartidaActual(PartidaActual partida){
+    }
+    public PartidaActual getPartidaActual(User user){
+        return null;
+    }
 }

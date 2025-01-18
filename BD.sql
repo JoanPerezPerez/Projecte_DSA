@@ -81,3 +81,9 @@ CREATE TABLE Video (
     descripcion VARCHAR(255) NOT NULL,
     url VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE PartidaActual (
+    UserName VARCHAR(255) NOT NULL,
+    txt VARCHAR(2500) NOT NULL,
+	nivell INT NOT NULL
+);

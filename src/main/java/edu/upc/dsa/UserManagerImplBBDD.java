@@ -410,5 +410,13 @@ public class UserManagerImplBBDD implements UserManager {
         return respuesta;
     }
 
+    public void guardarPartidaActual(PartidaActual partida){
+        if(this.sessionBD.get(PartidaActual.class, "UserName",partida.getUserName()) == null)this.sessionBD.save(partida);
+        else this.sessionBD.update(partida, "UserName", partida.getUserName());
+    }
 
+    public PartidaActual getPartidaActual(User user){
+        PartidaActual partida = (PartidaActual) this.sessionBD.get(PartidaActual.class, "UserName",user.getName());
+        return partida;
+    }
 }

@@ -188,4 +188,16 @@ public class UserManagerDBTest {
         this.um.ponInsigniaParaUsuario(i1,u1);
     }
 
+    @Test
+    public void GuardarPartidaActual(){
+        PartidaActual partida = new PartidaActual("Maaaarcel","9999-----------------------------------------BBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDDDDDDDDDDD--BBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDDDDDDDDDDD-FEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEF-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB------------------CCCCCCCCCCCCCCCCCCCCCCCCCC------------------CCCCCCCCCCCCCCCCCCCCCCCCCC------------------CCCCCCCCCCCCCCCCCCCCCCCCCC------------------CCCCCCCCCCCCCCCCCCCCCCCCCC-FEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEF-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB---------------------------------------------",2);
+        this.um.guardarPartidaActual(partida);
+    }
+
+    @Test
+    public void GetPartidaActual(){
+        User u1 = new User("Marcel","1343143","jna");
+        PartidaActual partida = this.um.getPartidaActual(u1);
+    }
+
 }

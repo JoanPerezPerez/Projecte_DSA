@@ -26,7 +26,7 @@ public class SessionImpl implements SessionBD {
 
     public void save(Object entity) {
         //Hi ha taules que tenen un ID, i altres que no, per això cal fer aquesta "distinció"
-        if (entity.getClass() == useritemcharacterrelation.class || entity.getClass() == Forum.class || entity.getClass() == InsigniaRelaciones.class) {
+        if (entity.getClass() == useritemcharacterrelation.class || entity.getClass() == Forum.class || entity.getClass() == InsigniaRelaciones.class || entity.getClass() == PartidaActual.class) {
             try {
                 String insertQuery = QueryHelper.createQueryINSERT(entity);
                 // INSERT INTO User (ID, lastName, firstName, address, city) VALUES (0, ?, ?, ?,?)

@@ -59,4 +59,7 @@ public interface UserManager {
 
     public List<Video> getmedia() throws QueryErrorException, NoDataException;
 
+    public void guardarPartidaActual(PartidaActual partida);
+
+    public PartidaActual getPartidaActual(User user);
 }
