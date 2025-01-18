@@ -320,7 +320,6 @@ public class UserManagerImplBBDD implements UserManager {
             }
             if(respuesta.isEmpty()) {
                 logger.warn("Attention, no insignia found");
-                return null;
             }
             return respuesta;
         }

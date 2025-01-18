@@ -196,8 +196,9 @@ public class UserManagerDBTest {
 
     @Test
     public void GetPartidaActual(){
-        User u1 = new User("Marcel","1343143","jna");
+        User u1 = new User("Marrcecel","1343143","jna");
         PartidaActual partida = this.um.getPartidaActual(u1);
+        int k = 12;
     }
 
 }
