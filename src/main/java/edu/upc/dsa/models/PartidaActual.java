@@ -4,11 +4,15 @@ public class PartidaActual {
     String UserName;
     String txt;
     int nivell;
+    int cobreActual;
+    int cobreTotal;
 
-    public PartidaActual(String userName, String txt, int nivell) {
+    public PartidaActual(String userName, String txt, int nivell,int cobreActual,int cobreTotal) {
         UserName = userName;
         this.txt = txt;
         this.nivell = nivell;
+        this.cobreActual=cobreActual;
+        this.cobreTotal=cobreTotal;
     }
     public PartidaActual() {};
 
@@ -34,5 +38,21 @@ public class PartidaActual {
 
     public void setNivell(int nivell) {
         this.nivell = nivell;
+    }
+
+    public int getCobreActual() {
+        return cobreActual;
+    }
+
+    public void setCobreActual(int cobreActual) {
+        this.cobreActual = cobreActual;
+    }
+
+    public int getCobreTotal() {
+        return cobreTotal;
+    }
+
+    public void setCobreTotal(int cobreTotal) {
+        this.cobreTotal = cobreTotal;
     }
 }
