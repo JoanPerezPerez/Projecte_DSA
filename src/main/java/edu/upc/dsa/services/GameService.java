@@ -79,7 +79,7 @@ public class GameService {
         try{
             User u = this.sesm.getSession(authToken);
             double cobreAdd=Double.parseDouble(CobreAmount);
-            logger.info(u.getName()+ " ha ganado: "+cobreAdd);
+            logger.info(u.getName()+ " ha ganado: "+cobreAdd+" en toda la partida");
 
             this.um.ponPartida(u,cobreAdd);
             //IMPLEMENTAR
@@ -110,6 +110,29 @@ public class GameService {
             return Response.status(201).build();
         } catch (UserNotLoggedInException ex) {
             return Response.status(501).build();
+        }
+    }
+    //CARGAR
+    @GET
+    @ApiOperation(value = "cargar level", notes = "hahaha")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful",response = PartidaActual.class),
+            @ApiResponse(code = 404, message = "Track not found")
+    })
+    @Path("/load")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLevel(@CookieParam("authToken") String authToken) {
+        try{
+            User u = this.sesm.getSession(authToken);
+            PartidaActual partida=this.um.getPartidaActual(u);
+            logger.info("Partida: "+partida.getTxt());
+            if(partida ==null)
+                return Response.status(404).build();
+            return Response.status(201).entity(partida).build();
+        }
+        catch (UserNotLoggedInException ex){
+            logger.warn("Attention, User not logged in yet");
+            return Response.status(404).build();
         }
     }
 }
