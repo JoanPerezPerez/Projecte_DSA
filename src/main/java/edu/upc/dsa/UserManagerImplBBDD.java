@@ -419,4 +419,10 @@ public class UserManagerImplBBDD implements UserManager {
         PartidaActual partida = (PartidaActual) this.sessionBD.get(PartidaActual.class, "UserName",user.getName());
         return partida;
     }
+    public void ponPartida(User u, double puntuacion){
+        Partidas part=new Partidas();
+        part.setID_Jugador(u.getID());
+        part.setPuntuacionMax(puntuacion);
+        sessionBD.save(part);
+    }
 }

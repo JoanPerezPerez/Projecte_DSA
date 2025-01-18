@@ -62,4 +62,6 @@ public interface UserManager {
     public void guardarPartidaActual(PartidaActual partida);
 
     public PartidaActual getPartidaActual(User user);
+
+    public void ponPartida(User u,double puntuacion);
 }

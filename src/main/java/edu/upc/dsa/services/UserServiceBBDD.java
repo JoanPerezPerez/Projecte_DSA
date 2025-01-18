@@ -263,32 +263,6 @@ public class UserServiceBBDD {
             return Response.status(506).build();
         }
     }
-    @POST
-    @ApiOperation(value = "User Updates Cobre", notes = "hello")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response= double.class),
-            @ApiResponse(code = 500, message = "Error"),
-            @ApiResponse(code = 501, message = "User not found"),
-            @ApiResponse(code = 506, message = "User Not logged in yet")
-    })
-    @Path("/updateCobre/{NameUser}/{Cobre}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response UserUpdatesCobre(@PathParam("NameUser") String NameUser, @PathParam("Cobre") double Cobre, @CookieParam("authToken") String authToken) {
-        if(NameUser == null || Cobre == 0) return Response.status(500).build();
-        try{
-            User u = this.sesm.getSession(authToken);
-            this.um.updateCobre(Cobre, u);
-            return Response.status(201).entity(String.valueOf(u.getCobre())).build();
-        }
-        catch(UserNotFoundException ex)
-        {
-            return Response.status(501).build();
-        }
-        catch(UserNotLoggedInException ex){
-            logger.warn("Attention, User not yet logged");
-            return Response.status(506).build();
-        }
-    }
 
     @POST
     @ApiOperation(value = "User sells all Cobre", notes = "hello")
