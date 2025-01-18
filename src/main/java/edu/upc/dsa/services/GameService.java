@@ -73,7 +73,7 @@ public class GameService {
             @ApiResponse(code = 404, message = "Track not found"),
             @ApiResponse(code = 506, message = "User not logged in")
     })
-    @Path("/addCobre/{Cobre}")
+    @Path("/addTotales/{Cobre}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addPuntosTotales(@PathParam("Cobre") String CobreAmount, @CookieParam("authToken") String authToken) {
         try{

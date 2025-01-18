@@ -280,4 +280,9 @@ public class UserManagerImpl implements UserManager {
     public PartidaActual getPartidaActual(User user){
         return null;
     }
+
+    @Override
+    public void ponPartida(User u, double puntuacion) {
+
+    }
 }
