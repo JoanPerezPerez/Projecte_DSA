@@ -36,3 +36,7 @@ INSERT INTO UserItemCharacterRelation VALUES
 (4,1,NULL),
 (4,2,NULL),
 (4,3,NULL);
+
+Insert INTO Partidas Values (NULL,4,30);
+Insert INTO Partidas Values (NULL,3,40);
+Insert INTO Partidas Values (NULL,2,10);
