@@ -2,9 +2,6 @@ package edu.upc.dsa.orm;
 
 
 import edu.upc.dsa.DBUtils;
-import edu.upc.dsa.models.useritemcharacterrelation;
-import edu.upc.dsa.orm.util.ObjectHelper;
-import edu.upc.dsa.orm.util.QueryHelper;
 
 import java.sql.*;
 

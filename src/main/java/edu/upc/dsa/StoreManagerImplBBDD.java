@@ -4,7 +4,7 @@ import edu.upc.dsa.exceptions.*;
 import edu.upc.dsa.models.GameCharacter;
 import edu.upc.dsa.models.Item;
 import edu.upc.dsa.models.User;
-import edu.upc.dsa.models.useritemcharacterrelation;
+import edu.upc.dsa.models.UserItemCharacterRelation;
 import edu.upc.dsa.orm.FactorySession;
 import edu.upc.dsa.orm.SessionBD;
 import org.apache.log4j.Logger;
@@ -71,7 +71,7 @@ public class StoreManagerImplBBDD implements StoreManager {
         Item i = (Item)session.get(Item.class, "name", ItemName);
         if (i == null) throw new ItemNotFoundException();
         if(u.getMoney()>=i.getCost()){
-            session.save(new useritemcharacterrelation(u.getID(),0,i.getID()));
+            session.save(new UserItemCharacterRelation(u.getID(),0,i.getID()));
             u.setMoney(u.getMoney()-i.getCost());
             session.update(u,"name",u.getName());
             session.close();
@@ -95,7 +95,7 @@ public class StoreManagerImplBBDD implements StoreManager {
         User u = (User)session.get(User.class, "name", nameUser);
         if (u == null) throw new UserNotFoundException();
         if(u.getMoney()>=c.getCost()){
-            session.save(new useritemcharacterrelation(u.getID(),c.getID(),0));
+            session.save(new UserItemCharacterRelation(u.getID(),c.getID(),0));
             u.setMoney(u.getMoney()-c.getCost());
             session.update(u,"name",u.getName());
             session.close();
@@ -133,7 +133,7 @@ public class StoreManagerImplBBDD implements StoreManager {
         session.deleteAll(Item.class);
         session.deleteAll(User.class);
         session.deleteAll(GameCharacter.class);
-        session.deleteAll(useritemcharacterrelation.class);
+        session.deleteAll(UserItemCharacterRelation.class);
         session.close();
     }
 
