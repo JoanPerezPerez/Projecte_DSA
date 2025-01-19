@@ -42,7 +42,7 @@ public class GameService {
     @ApiOperation(value = "sumarcobre", notes = "hahaha")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful"),
-            @ApiResponse(code = 404, message = "Track not found"),
+            @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 506, message = "User not logged in")
     })
     @Path("/addCobre/{Cobre}")

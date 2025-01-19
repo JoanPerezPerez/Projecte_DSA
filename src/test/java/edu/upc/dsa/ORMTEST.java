@@ -49,6 +49,7 @@ public class ORMTEST {
         session.save(u3);
         u4.setMoney(100);
         //session.save(u4);
+        session.close();
     }
     @Test
     public void TestAddItems(){
@@ -57,6 +58,7 @@ public class ORMTEST {
         session.save(item2);
         session.save(item3);
         session.save(item4);
+        session.close();
     }
     @Test
     public void TestAddCharacters(){
@@ -64,6 +66,7 @@ public class ORMTEST {
         session.save(c1);
         session.save(c2);
         session.save(c3);
+        session.close();
     }
 
     @Test
@@ -74,6 +77,7 @@ public class ORMTEST {
         session.save(r3);
         List<useritemcharacterrelation> relations = (List<useritemcharacterrelation>) session.findAll(r1.getClass());
         Assert.assertEquals(3,relations.size());
+        session.close();
     }
 
     @Test
@@ -82,6 +86,7 @@ public class ORMTEST {
         session.deleteAll(r1.getClass());
         List<useritemcharacterrelation> relations = (List<useritemcharacterrelation>)session.findAll(r1.getClass());
         Assert.assertEquals(0,relations.size());
+        session.close();
     }
 
     @Test
@@ -89,12 +94,14 @@ public class ORMTEST {
         SessionBD session = FactorySession.openSession(); //url, user, password);
         User u5 = (User)session.get(u1.getClass(), "ID",8);
         User u6 = (User)session.get(u1.getClass(),"name", "Marcel");
+        session.close();
     }
 
     @Test
     public void TestDelete(){
         SessionBD session = FactorySession.openSession(); //url, user, password);
         session.delete(User.class,"name", u2.getName());
+        session.close();
     }
 
     @Test
@@ -102,24 +109,28 @@ public class ORMTEST {
         SessionBD session = FactorySession.openSession();
         u1.setCobre(8673);
         session.update(u1,"name", u1.getName());
+        session.close();
     }
 
     @Test
     public void TestFindAllUsers(){
         SessionBD session = FactorySession.openSession();
         List<User> users =(List<User>) session.findAll(u1.getClass());
+        session.close();
     }
 
     @Test
     public void TestFindAllRelations(){
         SessionBD session = FactorySession.openSession();
         List<useritemcharacterrelation> relations = (List<useritemcharacterrelation>) session.findAll(r1.getClass());
+        session.close();
     }
 
     @Test
     public void TestGetWithCorreu(){
         SessionBD session = FactorySession.openSession();
         User u43 = (User)session.get(u1.getClass(),"correo",u1.getCorreo());
+        session.close();
     }
 
     @Test
@@ -127,6 +138,7 @@ public class ORMTEST {
         SessionBD session = FactorySession.openSession();
         item1.setCost(3471);
         session.update(item1,"name",item1.getName());
+        session.close();
     }
 
     @Test
@@ -135,6 +147,7 @@ public class ORMTEST {
         User u4 = (User)session.get(User.class, "name", "Marcel");
         Item i4 = (Item)session.get(Item.class,"name","Sierra");
         GameCharacter g4 = (GameCharacter)session.get(GameCharacter.class,"name","primer");
+        session.close();
     }
 
     @Test
@@ -144,6 +157,7 @@ public class ORMTEST {
         values.put("name =","Marcel");
         values.put("money >","50");
         List<User> users = (List<User>)session.findAllWithConditionsAND(User.class,values);
+        session.close();
     }
 
     @Test
@@ -153,6 +167,7 @@ public class ORMTEST {
         session.deleteAll(User.class);
         session.deleteAll(GameCharacter.class);
         session.deleteAll(useritemcharacterrelation.class);
+        session.close();
     }
 
     @Test
@@ -160,8 +175,7 @@ public class ORMTEST {
         SessionBD session = FactorySession.openSession();
         List<GameCharacter> respuesta = (List<GameCharacter>)session.getRelaciones(GameCharacter.class,"name","Marcel");
         List<Item> respuesta2 = (List<Item>)session.getRelaciones(Item.class,"name","Marcel");
-
-        int k = 12;
+        session.close();
     }
 
     @Test
@@ -170,13 +184,14 @@ public class ORMTEST {
         session.save(new Forum("Marcel","hola que tal va tot?"));
         session.save(new Forum("Lluc","molt bé"));
         session.save(new Forum("Blau","jo també"));
+        session.close();
     }
 
     @Test
     public void GetAllXats(){
         SessionBD session = FactorySession.openSession();
         List<Forum> xats = (List<Forum>) session.findAll(Forum.class);
-        int k = 12;
+        session.close();
     }
 
     @Test
@@ -188,6 +203,7 @@ public class ORMTEST {
         session.save(chat1);
         session.save(chat2);
         session.save(chat3);
+        session.close();
     }
 
     @Test
@@ -197,7 +213,7 @@ public class ORMTEST {
         condiciones.put("nameTo = ","Marcel");
         condiciones.put("nameFrom = ","Marcel");
         List<ChatIndividual> respuesta1 = (List<ChatIndividual>) session.findAllWithConditionsOR(ChatIndividual.class, condiciones);
-        int k = 12;
+        session.close();
     }
     @Test
     public void GetChatIndividual(){
@@ -206,7 +222,7 @@ public class ORMTEST {
         condiciones.put("nameFrom = ","Marcel");
         condiciones.put("nameTo =  ","Blau");
         List<ChatIndividual> respuesta = (List<ChatIndividual>) session.findAllWithConditionsAND(ChatIndividual.class, condiciones);
-        int k = 12;
+        session.close();
     }
 
     @Test
@@ -218,6 +234,7 @@ public class ORMTEST {
         session.save(i1);
         session.save(i2);
         session.save(i3);
+        session.close();
     }
 
     @Test
@@ -229,6 +246,7 @@ public class ORMTEST {
         session.save(i1);
         session.save(i2);
         session.save(i3);
+        session.close();
     }
 
 

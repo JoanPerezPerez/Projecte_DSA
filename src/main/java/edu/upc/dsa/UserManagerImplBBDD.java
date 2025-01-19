@@ -321,10 +321,12 @@ public class UserManagerImplBBDD implements UserManager {
             if(respuesta.isEmpty()) {
                 logger.warn("Attention, no insignia found");
             }
+            sessionBD.close();
             return respuesta;
         }
         catch(Exception ex){
             logger.warn("Attention, Exception in the getAllInsignias query");
+            sessionBD.close();
             return null;
         }
     }
