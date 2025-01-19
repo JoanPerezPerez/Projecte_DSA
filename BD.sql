@@ -21,13 +21,13 @@ CREATE TABLE Item (
 	item_url VARCHAR(255) NOT NULL
 );
 
--- Taula 3: Characters
-CREATE TABLE GameCharacter  (
+CREATE TABLE GameCharacter (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     cost DOUBLE NOT NULL,
     speed INT NOT NULL,
-    strength INT NOT NULL
+    strength INT NOT NULL,
+    character_url VARCHAR(255) NOT NULL
 );
 
 -- Taula 4: Relacional de Users, Items i Characters

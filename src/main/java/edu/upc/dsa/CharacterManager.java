@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CharacterManager {
 
-    public GameCharacter addCharacter(int stealth, int speed, int strength, String name, double cost) throws ItemRepeatedException;
+    public GameCharacter addCharacter(int stealth, int speed, int strength, String name, double cost, String url) throws ItemRepeatedException;
     public void clear();
     public int size();
     public GameCharacter getCharacter(String name);

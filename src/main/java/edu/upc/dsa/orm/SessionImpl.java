@@ -26,7 +26,7 @@ public class SessionImpl implements SessionBD {
 
     public void save(Object entity) {
         //Hi ha taules que tenen un ID, i altres que no, per això cal fer aquesta "distinció"
-        if (entity.getClass() == useritemcharacterrelation.class || entity.getClass() == Forum.class || entity.getClass() == InsigniaRelaciones.class || entity.getClass() == PartidaActual.class) {
+        if (entity.getClass() == UserItemCharacterRelation.class || entity.getClass() == Forum.class || entity.getClass() == InsigniaRelaciones.class || entity.getClass() == PartidaActual.class) {
             try {
                 String insertQuery = QueryHelper.createQueryINSERT(entity);
                 // INSERT INTO User (ID, lastName, firstName, address, city) VALUES (0, ?, ?, ?,?)
@@ -92,9 +92,15 @@ public class SessionImpl implements SessionBD {
                 while (i < numColumns + 1) {
                     String key = rsmd.getColumnName(i);
                     Object value = res.getObject(i);
-                    if (key.equals("money") || key.equals("cobre")){
-                        BigDecimal value1 = (BigDecimal) value;
-                        value = value1.setScale(2, RoundingMode.DOWN).doubleValue(); // Truncar a 2 decimals
+                    if (key.equals("money") || key.equals("cobre")) {
+                        if (value instanceof BigDecimal) {
+                            BigDecimal value1 = (BigDecimal) value;
+                            value = value1.setScale(2, RoundingMode.DOWN).doubleValue(); // Truncar a 2 decimales
+                        } else if (value instanceof Double) {
+                            Double doubleValue = (Double) value;
+                            BigDecimal value1 = BigDecimal.valueOf(doubleValue);
+                            value = value1.setScale(2, RoundingMode.DOWN).doubleValue(); // Truncar a 2 decimales
+                        }
                     }
                     ObjectHelper.setter(o, key, value);
                     i++;

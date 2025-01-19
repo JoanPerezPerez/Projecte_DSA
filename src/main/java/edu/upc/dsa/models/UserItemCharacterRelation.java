@@ -1,13 +1,13 @@
 package edu.upc.dsa.models;
 
-public class useritemcharacterrelation {
+public class UserItemCharacterRelation {
     int ID_User;
     int ID_GameCharacter;
     int ID_Item;
 
-    public  useritemcharacterrelation(){};
+    public UserItemCharacterRelation(){};
 
-    public useritemcharacterrelation(int ID_User, int ID_GameCharacter, int ID_Item) {
+    public UserItemCharacterRelation(int ID_User, int ID_GameCharacter, int ID_Item) {
         this.ID_User = ID_User;
         this.ID_GameCharacter = ID_GameCharacter;
         this.ID_Item = ID_Item;

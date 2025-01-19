@@ -27,9 +27,9 @@ public class CharacterManagerImplBBDD implements CharacterManager {
         session.close();
         return respuesta;
     };
-    public GameCharacter addCharacter(int stealth, int speed, int strength, String name, double cost) throws ItemRepeatedException {
+    public GameCharacter addCharacter(int stealth, int speed, int strength, String name, double cost, String url) throws ItemRepeatedException {
         session = FactorySession.openSession();
-        GameCharacter gameCharacter1 = new GameCharacter(stealth, speed, strength, name, cost);
+        GameCharacter gameCharacter1 = new GameCharacter(stealth, speed, strength, name, cost, url);
         if(session.get(GameCharacter.class,"name", name) != null) throw new ItemRepeatedException();
         session.save(gameCharacter1);
         session.close();

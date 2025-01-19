@@ -72,9 +72,9 @@ public class UserService {
                     this.um.addUser(u3);
                     this.um.addUser(u4);
                     this.sm.addAllUsers(this.um.findAll());
-                    this.cm.addCharacter(1,1,1,"primer",10);
-                    this.cm.addCharacter(1,1,1,"segon",60);
-                    this.cm.addCharacter(1,1,1,"tercer",50);
+                    this.cm.addCharacter(1,1,1,"primer",10,"http://10.0.2.2:8080/itemsIcons/cizalla.png");
+                    this.cm.addCharacter(1,1,1,"segon",60,"http://10.0.2.2:8080/itemsIcons/cizalla.png");
+                    this.cm.addCharacter(1,1,1,"tercer",50,"http://10.0.2.2:8080/itemsIcons/cizalla.png");
                     this.sm.addAllCharacters(this.cm.findAll());
                 }
                 catch(UserRepeatedException ex){

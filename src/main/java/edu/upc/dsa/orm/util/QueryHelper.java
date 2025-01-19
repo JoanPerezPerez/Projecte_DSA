@@ -104,7 +104,7 @@ public class QueryHelper {
     }
     public static String createSelectIDWhereNotIn(Class theClass) {
         //SELECT * FROM Item WHERE ID NOT IN (SELECT ID_Item FROM UserItemCharacterRelation WHERE ID_User = <ID_DEL_USUARIO>);
-        StringBuffer sb = new StringBuffer("SELECT * FROM "+theClass.getSimpleName()+" WHERE ID NOT IN(SELECT ID_" + theClass.getSimpleName()+ " FROM useritemcharacterrelation WHERE ID_User = ? AND ID_"+ theClass.getSimpleName()+ " IS NOT NULL)");
+        StringBuffer sb = new StringBuffer("SELECT * FROM "+theClass.getSimpleName()+" WHERE ID NOT IN(SELECT ID_" + theClass.getSimpleName()+ " FROM UserItemCharacterRelation WHERE ID_User = ? AND ID_"+ theClass.getSimpleName()+ " IS NOT NULL)");
         return sb.toString();
     }
     public static String createSelectFindAllAND(Class theClass, HashMap<Object, Object> params) {

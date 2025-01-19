@@ -20,12 +20,12 @@ public class ORMTEST {
     User u2 = new User("Lluc", "Falco12","emailLluc");
     User u3 = new User("David", "1234","emailDavid");
     User u4 = new User("Marcel", "1234","marcel.guim@estudiantat.upc.edu");
-    GameCharacter c1 = new GameCharacter(1, 1, 1, "primer", 10);
-    GameCharacter c2 = new GameCharacter(1, 1, 1, "segon", 60);
-    GameCharacter c3 = new GameCharacter(1, 1, 1, "tercer", 50);
-    useritemcharacterrelation r1 = new useritemcharacterrelation();
-    useritemcharacterrelation r2 = new useritemcharacterrelation();
-    useritemcharacterrelation r3 = new useritemcharacterrelation();
+    GameCharacter c1 = new GameCharacter(1, 1, 1, "ladrón basico", 10, "http://10.0.2.2:8080/itemsIcons/pelacables.png");
+    GameCharacter c2 = new GameCharacter(1, 1, 1, "ladrón punk", 60, "http://10.0.2.2:8080/itemsIcons/pelacables.png");
+    GameCharacter c3 = new GameCharacter(1, 1, 1, "ladrón profesional", 50, "http://10.0.2.2:8080/itemsIcons/pelacables.png");
+    UserItemCharacterRelation r1 = new UserItemCharacterRelation();
+    UserItemCharacterRelation r2 = new UserItemCharacterRelation();
+    UserItemCharacterRelation r3 = new UserItemCharacterRelation();
     @Before
     public void setUp() {
         u4.setMoney(50);
@@ -75,7 +75,7 @@ public class ORMTEST {
         session.save(r1);
         session.save(r2);
         session.save(r3);
-        List<useritemcharacterrelation> relations = (List<useritemcharacterrelation>) session.findAll(r1.getClass());
+        List<UserItemCharacterRelation> relations = (List<UserItemCharacterRelation>) session.findAll(r1.getClass());
         Assert.assertEquals(3,relations.size());
         session.close();
     }
@@ -84,7 +84,7 @@ public class ORMTEST {
     public void TestDeleteRelations(){
         SessionBD session = FactorySession.openSession(); //url, user, password);
         session.deleteAll(r1.getClass());
-        List<useritemcharacterrelation> relations = (List<useritemcharacterrelation>)session.findAll(r1.getClass());
+        List<UserItemCharacterRelation> relations = (List<UserItemCharacterRelation>)session.findAll(r1.getClass());
         Assert.assertEquals(0,relations.size());
         session.close();
     }
@@ -122,7 +122,7 @@ public class ORMTEST {
     @Test
     public void TestFindAllRelations(){
         SessionBD session = FactorySession.openSession();
-        List<useritemcharacterrelation> relations = (List<useritemcharacterrelation>) session.findAll(r1.getClass());
+        List<UserItemCharacterRelation> relations = (List<UserItemCharacterRelation>) session.findAll(r1.getClass());
         session.close();
     }
 
@@ -166,7 +166,7 @@ public class ORMTEST {
         session.deleteAll(Item.class);
         session.deleteAll(User.class);
         session.deleteAll(GameCharacter.class);
-        session.deleteAll(useritemcharacterrelation.class);
+        session.deleteAll(UserItemCharacterRelation.class);
         session.close();
     }
 
