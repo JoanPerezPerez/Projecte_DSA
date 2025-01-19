@@ -76,20 +76,20 @@ CREATE TABLE `gamecharacter` (
   `cost` double NOT NULL,
   `speed` int(11) NOT NULL,
   `strength` int(11) NOT NULL,
+  `character_url` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
 -- Dumping data for table `gamecharacter`
---
-
 LOCK TABLES `gamecharacter` WRITE;
 /*!40000 ALTER TABLE `gamecharacter` DISABLE KEYS */;
 INSERT INTO `gamecharacter` VALUES
-(1,'primer',10,1,1),
-(2,'segon',60,1,1),
-(3,'tercer',50,1,1);
+(1,'Ladron aprendiz',1,1,1,'http://10.0.2.2:8080/itemsIcons/ladron_aprendiz.png'),
+(2,'Ladron punk',100,2,2,'http://10.0.2.2:8080/itemsIcons/ladron_punk.png'),
+(3,'Ladron manitas',150,3,3,'http://10.0.2.2:8080/itemsIcons/ladron_manitas.png'),
+(4,'Ladron infiltrado',200,4,4,'http://10.0.2.2:8080/itemsIcons/ladron_infiltrado.png'),
+(5,'Ladron profesional',300,5,5,'http://10.0.2.2:8080/itemsIcons/ladron_profesional.png');
 /*!40000 ALTER TABLE `gamecharacter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,15 +198,6 @@ CREATE TABLE `partidas` (
 
 LOCK TABLES `partidas` WRITE;
 /*!40000 ALTER TABLE `partidas` DISABLE KEYS */;
-INSERT INTO `partidas` VALUES
-(1,1,100),
-(2,1,200),
-(3,2,150),
-(4,2,250),
-(7,4,400),
-(8,4,500),
-(9,6,500),
-(10,3,150);
 /*!40000 ALTER TABLE `partidas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +230,7 @@ INSERT INTO `user` VALUES
 (2,'Lluc','Falco12','joan.lluc.fernandez@estudiantat.upc.edu',1000.00,1000.00),
 (3,'David','123','david.arenas.romero@estudiantat.upc.edu',1000.00,100.50),
 (4,'Marcel','123','marcel.guim@estudiantat.upc.edu',1723.70,1426.00),
-(6,'Joan','123','joan.perez.p@estudiantat.upc.edu',1000.00,1000.00);
+(5,'Joan','123','joan.perez.p@estudiantat.upc.edu',1000.00,1000.00);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 

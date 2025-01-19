@@ -20,9 +20,9 @@ public class ORMTEST {
     User u2 = new User("Lluc", "Falco12","emailLluc");
     User u3 = new User("David", "1234","emailDavid");
     User u4 = new User("Marcel", "1234","marcel.guim@estudiantat.upc.edu");
-    GameCharacter c1 = new GameCharacter(1, 1, 1, "primer", 10);
-    GameCharacter c2 = new GameCharacter(1, 1, 1, "segon", 60);
-    GameCharacter c3 = new GameCharacter(1, 1, 1, "tercer", 50);
+    GameCharacter c1 = new GameCharacter(1, 1, 1, "ladrón basico", 10, "http://10.0.2.2:8080/itemsIcons/pelacables.png");
+    GameCharacter c2 = new GameCharacter(1, 1, 1, "ladrón punk", 60, "http://10.0.2.2:8080/itemsIcons/pelacables.png");
+    GameCharacter c3 = new GameCharacter(1, 1, 1, "ladrón profesional", 50, "http://10.0.2.2:8080/itemsIcons/pelacables.png");
     useritemcharacterrelation r1 = new useritemcharacterrelation();
     useritemcharacterrelation r2 = new useritemcharacterrelation();
     useritemcharacterrelation r3 = new useritemcharacterrelation();

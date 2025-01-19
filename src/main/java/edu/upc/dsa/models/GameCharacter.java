@@ -6,14 +6,24 @@ public class GameCharacter {
     int strength;
     int speed;
     double cost;
+    String character_url;
 
     public GameCharacter(){}
 
-    public GameCharacter(int stealth, int speed, int strength, String name, double cost) {
+    public GameCharacter(int stealth, int speed, int strength, String name, double cost, String url) {
         this.setSpeed(speed);
         this.setStrength(strength);
         this.setName(name);
         this.setCost(cost);
+        this.setCharacter_url(url);
+    }
+
+    public String getCharacter_url() {
+        return character_url;
+    }
+
+    public void setCharacter_url(String character_url) {
+        this.character_url = character_url;
     }
 
     public String getName() {

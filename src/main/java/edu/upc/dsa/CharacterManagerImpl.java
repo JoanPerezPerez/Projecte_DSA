@@ -21,8 +21,8 @@ public class CharacterManagerImpl implements CharacterManager {
     public List<GameCharacter> getAllCharacters(){
       return gameCharacters;
     };
-    public GameCharacter addCharacter(int stealth, int speed, int strength, String name, double cost){
-        GameCharacter gameCharacter1 = new GameCharacter(stealth, speed, strength, name, cost);
+    public GameCharacter addCharacter(int stealth, int speed, int strength, String name, double cost, String url){
+        GameCharacter gameCharacter1 = new GameCharacter(stealth, speed, strength, name, cost, url);
         this.gameCharacters.add(gameCharacter1);
         return gameCharacter1;
     };
