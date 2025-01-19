@@ -104,6 +104,7 @@ public class GameService {
         try {
             User u = this.sesm.getSession(authToken);
             level_actually.setUserName(u.getName());
+            logger.info(level_actually.getCobreActual() + level_actually.getCobreTotal());
             this.um.guardarPartidaActual(level_actually);
             // Now you can access the plain text data from the body
             System.out.println("Received level: " + level_actually);

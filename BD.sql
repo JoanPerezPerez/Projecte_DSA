@@ -1,4 +1,3 @@
-
 DROP DATABASE IF EXISTS robacobresdb;
 CREATE DATABASE robacobresdb;
 USE robacobresdb;
@@ -84,5 +83,7 @@ CREATE TABLE Video (
 CREATE TABLE PartidaActual (
     UserName VARCHAR(255) NOT NULL,
     txt VARCHAR(2500) NOT NULL,
-	nivell INT NOT NULL
+	nivell INT NOT NULL,
+    cobreActual INT,
+    cobreTotal INT
 );
