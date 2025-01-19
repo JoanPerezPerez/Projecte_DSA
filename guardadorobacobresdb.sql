@@ -85,11 +85,11 @@ CREATE TABLE `gamecharacter` (
 LOCK TABLES `gamecharacter` WRITE;
 /*!40000 ALTER TABLE `gamecharacter` DISABLE KEYS */;
 INSERT INTO `gamecharacter` VALUES
-(1,'Ladron aprendiz',1,1,1,'http://10.0.2.2:8080/itemsIcons/ladron_aprendiz.png'),
-(2,'Ladron punk',100,2,2,'http://10.0.2.2:8080/itemsIcons/ladron_punk.png'),
-(3,'Ladron manitas',150,3,3,'http://10.0.2.2:8080/itemsIcons/ladron_manitas.png'),
-(4,'Ladron infiltrado',200,4,4,'http://10.0.2.2:8080/itemsIcons/ladron_infiltrado.png'),
-(5,'Ladron profesional',300,5,5,'http://10.0.2.2:8080/itemsIcons/ladron_profesional.png');
+(1,'Ladron aprendiz',1,1,1,'http://147.83.7.204/itemsIcons/ladron_aprendiz.png'),
+(2,'Ladron punk',100,2,2,'http://147.83.7.204/itemsIcons/ladron_punk.png'),
+(3,'Ladron manitas',150,3,3,'http://147.83.7.204/itemsIcons/ladron_manitas.png'),
+(4,'Ladron infiltrado',200,4,4,'http://147.83.7.204/itemsIcons/ladron_infiltrado.png'),
+(5,'Ladron profesional',300,5,5,'http://147.83.7.204/itemsIcons/ladron_profesional.png');
 /*!40000 ALTER TABLE `gamecharacter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,10 +168,10 @@ CREATE TABLE `item` (
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` VALUES
-(1,'Cizalla',100,0,0,'http://10.0.2.2:8080/itemsIcons/cizalla.png'),
-(2,'Sierra Electrica',100,0,0,'http://10.0.2.2:8080/itemsIcons/sierraelec.png'),
-(3,'PelaCables2000',100,0,0,'http://10.0.2.2:8080/itemsIcons/pelacables.png'),
-(4,'Sierra',200,0,0,'http://10.0.2.2:8080/itemsIcons/sierra.png');
+(1,'Cizalla',100,0,0,'http://147.83.7.204/itemsIcons/cizalla.png'),
+(2,'Sierra Electrica',100,0,0,'http://147.83.7.204/itemsIcons/sierraelec.png'),
+(3,'PelaCables2000',100,0,0,'http://147.83.7.204/itemsIcons/pelacables.png'),
+(4,'Sierra',200,0,0,'http://147.83.7.204/itemsIcons/sierra.png');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
