@@ -104,7 +104,6 @@ public class SessionImpl implements SessionBD {
             logger.info("No "+theClass.getSimpleName()+" found");
             return null;
         } catch (Exception ex) {
-            logger.warn("Error in the get function: "+ ex);
             return null;
         }
     }
