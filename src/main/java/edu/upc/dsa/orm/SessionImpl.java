@@ -92,9 +92,15 @@ public class SessionImpl implements SessionBD {
                 while (i < numColumns + 1) {
                     String key = rsmd.getColumnName(i);
                     Object value = res.getObject(i);
-                    if (key.equals("money") || key.equals("cobre")){
-                        BigDecimal value1 = (BigDecimal) value;
-                        value = value1.setScale(2, RoundingMode.DOWN).doubleValue(); // Truncar a 2 decimals
+                    if (key.equals("money") || key.equals("cobre")) {
+                        if (value instanceof BigDecimal) {
+                            BigDecimal value1 = (BigDecimal) value;
+                            value = value1.setScale(2, RoundingMode.DOWN).doubleValue(); // Truncar a 2 decimales
+                        } else if (value instanceof Double) {
+                            Double doubleValue = (Double) value;
+                            BigDecimal value1 = BigDecimal.valueOf(doubleValue);
+                            value = value1.setScale(2, RoundingMode.DOWN).doubleValue(); // Truncar a 2 decimales
+                        }
                     }
                     ObjectHelper.setter(o, key, value);
                     i++;
