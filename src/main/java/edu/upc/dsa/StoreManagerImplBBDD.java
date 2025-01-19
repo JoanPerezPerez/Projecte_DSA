@@ -39,7 +39,6 @@ public class StoreManagerImplBBDD implements StoreManager {
         this.im = ItemManagerImpl.getInstance();
         this.um = UserManagerImpl.getInstance();
         this.cm = CharacterManagerImpl.getInstance();
-        session = FactorySession.openSession();
     }
 
     public static StoreManager getInstance() {
@@ -66,6 +65,7 @@ public class StoreManagerImplBBDD implements StoreManager {
     };
 
     public List<Item> BuyItemUser(String ItemName, String nameUser) throws UserNotFoundException, ItemNotFoundException, NotEnoughMoneyException, UserHasNoItemsException {
+        session = FactorySession.openSession();
         User u = (User)session.get(User.class, "name", nameUser);
         if (u==null) throw new UserNotFoundException();
         Item i = (Item)session.get(Item.class, "name", ItemName);
@@ -74,6 +74,7 @@ public class StoreManagerImplBBDD implements StoreManager {
             session.save(new useritemcharacterrelation(u.getID(),0,i.getID()));
             u.setMoney(u.getMoney()-i.getCost());
             session.update(u,"name",u.getName());
+            session.close();
             logger.info(u.getName()+" HA COMPRADO "+i.getName());
             try{
                 return getItemsUserCanBuy(u);
@@ -81,10 +82,14 @@ public class StoreManagerImplBBDD implements StoreManager {
                 throw new UserHasNoItemsException();
             }
         }
-        else throw new NotEnoughMoneyException();
+        else {
+            session.close();
+            throw new NotEnoughMoneyException();
+        }
     };
 
     public List<GameCharacter> BuyCharacter(String nameUser, String nameCharacter) throws UserNotFoundException, CharacterNotFoundException, NotEnoughMoneyException, UserHasNoCharacterException {
+        session = FactorySession.openSession();
         GameCharacter c = (GameCharacter)session.get(GameCharacter.class,"name",nameCharacter);
         if (c== null) throw new CharacterNotFoundException();
         User u = (User)session.get(User.class, "name", nameUser);
@@ -93,37 +98,49 @@ public class StoreManagerImplBBDD implements StoreManager {
             session.save(new useritemcharacterrelation(u.getID(),c.getID(),0));
             u.setMoney(u.getMoney()-c.getCost());
             session.update(u,"name",u.getName());
+            session.close();
             try{
                 return getCharacterUserCanBuy(u);
             } catch (UserHasNoCharacterException e) {
                 throw new UserHasNoCharacterException();
             }
         }
-        else throw new NotEnoughMoneyException();
+        else {
+            session.close();
+            throw new NotEnoughMoneyException();
+        }
     }
 
     public List<Item> getItemUser(String userName) throws UserNotFoundException, UserHasNoItemsException{
+        session = FactorySession.openSession();
         List<Item> respuesta = (List<Item>)session.getRelaciones(Item.class,"name",userName);
+        session.close();
         if(respuesta ==null) throw new UserNotFoundException();
         if(respuesta.isEmpty()) throw new UserHasNoItemsException();
         return respuesta;
     };
 
     public List<GameCharacter> getCharacterUser(String userName) throws UserNotFoundException, UserHasNoCharacterException{
+        session = FactorySession.openSession();
         List<GameCharacter> respuesta = (List<GameCharacter>)session.getRelaciones(GameCharacter.class,"name",userName);
+        session.close();
         if(respuesta ==null) throw new UserNotFoundException();
         if(respuesta.isEmpty()) throw new UserHasNoCharacterException();
         return respuesta;
     }
     public void clear(){
+        session = FactorySession.openSession();
         session.deleteAll(Item.class);
         session.deleteAll(User.class);
         session.deleteAll(GameCharacter.class);
         session.deleteAll(useritemcharacterrelation.class);
+        session.close();
     }
 
     public List<Item> getItemsUserCanBuy(User u) throws UserHasNoItemsException{
+        session = FactorySession.openSession();
         List<Item> itemsUserCanBuy = (List<Item>)session.findObjectNotBoughtForUser(Item.class,"name",u.getName());
+        session.close();
         if(itemsUserCanBuy.isEmpty()){
             throw new UserHasNoItemsException();
         }
@@ -136,7 +153,9 @@ public class StoreManagerImplBBDD implements StoreManager {
 
     };
     public List<GameCharacter> getCharacterUserCanBuy(User u) throws UserHasNoCharacterException{
+        session = FactorySession.openSession();
         List<GameCharacter> CharacterUserCanBuy = (List<GameCharacter>)session.findObjectNotBoughtForUser(GameCharacter.class,"name",u.getName());
+        session.close();
         if(CharacterUserCanBuy.isEmpty()) {
             throw new UserHasNoCharacterException();
         }

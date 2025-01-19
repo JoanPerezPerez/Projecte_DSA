@@ -14,7 +14,6 @@ public class CharacterManagerImplBBDD implements CharacterManager {
 
 
     private CharacterManagerImplBBDD() {
-        session = FactorySession.openSession();
     }
 
     public static CharacterManager getInstance() {
@@ -23,28 +22,44 @@ public class CharacterManagerImplBBDD implements CharacterManager {
     }
 
     public List<GameCharacter> getAllCharacters(){
-      return (List<GameCharacter>)session.findAll(GameCharacter.class);
+        session = FactorySession.openSession();
+        List<GameCharacter> respuesta = (List<GameCharacter>)session.findAll(GameCharacter.class);
+        session.close();
+        return respuesta;
     };
     public GameCharacter addCharacter(int stealth, int speed, int strength, String name, double cost) throws ItemRepeatedException {
+        session = FactorySession.openSession();
         GameCharacter gameCharacter1 = new GameCharacter(stealth, speed, strength, name, cost);
         if(session.get(GameCharacter.class,"name", name) != null) throw new ItemRepeatedException();
         session.save(gameCharacter1);
+        session.close();
         return gameCharacter1;
     };
 
     public GameCharacter getCharacter(String name){
-        return (GameCharacter)session.get(GameCharacter.class, "name", name);
+        session = FactorySession.openSession();
+        GameCharacter respuesta = (GameCharacter)session.get(GameCharacter.class, "name", name);
+        session.close();
+        return respuesta;
     };
 
 
     public void clear(){
+        session = FactorySession.openSession();
         session.deleteAll(GameCharacter.class);
+        session.close();
     };
     public int size(){
-      return session.findAll(GameCharacter.class).size();
+        session = FactorySession.openSession();
+        int respuesta = session.findAll(GameCharacter.class).size();
+        session.close();
+        return respuesta;
     };
 
     public List<GameCharacter> findAll(){
-        return (List<GameCharacter>)session.findAll(GameCharacter.class);
+        session = FactorySession.openSession();
+        List<GameCharacter> respuesta = (List<GameCharacter>)session.findAll(GameCharacter.class);
+        session.close();
+        return respuesta;
     }
 }
