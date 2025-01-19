@@ -344,7 +344,7 @@ public class UserManagerImplBBDD implements UserManager {
             sessionBD = FactorySession.openSession();
             Connection con = sessionBD.dameConnection();
             User u = (User) sessionBD.get(User.class, "name", user.getName());
-            String query = "SELECT Insignia.* FROM Insignia JOIN Insigniarelaciones ON Insignia.ID = InsigniaRelaciones.ID_Insignia WHERE InsigniaRelaciones.ID_User = "+u.getID() +";";
+            String query = "SELECT Insignia.* FROM Insignia JOIN InsigniaRelaciones ON Insignia.ID = InsigniaRelaciones.ID_Insignia WHERE InsigniaRelaciones.ID_User = "+u.getID() +";";
             PreparedStatement pstm = null;
             pstm = con.prepareStatement(query);
             ResultSet res = pstm.executeQuery();
