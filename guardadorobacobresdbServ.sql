@@ -121,17 +121,16 @@ UNLOCK TABLES;
 -- Table structure for table `insigniarelaciones`
 --
 
-DROP TABLE IF EXISTS `insigniarelaciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `insigniarelaciones` (
   `ID_User` int(11) DEFAULT NULL,
   `ID_Insignia` int(11) DEFAULT NULL,
   KEY `ID_User` (`ID_User`),
-  KEY `ID_Insignia` (`ID_Insignia`),
-  CONSTRAINT `insigniarelaciones_ibfk_1` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID`),
-  CONSTRAINT `insigniarelaciones_ibfk_2` FOREIGN KEY (`ID_Insignia`) REFERENCES `insignia` (`ID`)
+  KEY `ID_Insignia` (`ID_Insignia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `insigniarelaciones`
+ADD CONSTRAINT `insigniarelaciones_ibfk_1` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID`),
+ADD CONSTRAINT `insigniarelaciones_ibfk_2` FOREIGN KEY (`ID_Insignia`) REFERENCES `insignia` (`ID`);
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
