@@ -187,9 +187,9 @@ public class QueryHelper {
         return sb.toString();
     }
     public static String createQueryGetWithRelations(Class theClass){
-        StringBuffer sb = new StringBuffer("SELECT * FROM useritemcharacterrelation INNER JOIN ");
+        StringBuffer sb = new StringBuffer("SELECT * FROM UserItemCharacterRelation INNER JOIN ");
         sb.append(theClass.getSimpleName());
-        sb.append(" ON useritemcharacterrelation.ID_").append(theClass.getSimpleName()).append(" = ").append(theClass.getSimpleName()).append(".ID WHERE useritemcharacterrelation.ID_User = ?");
+        sb.append(" ON UserItemCharacterRelation.ID_").append(theClass.getSimpleName()).append(" = ").append(theClass.getSimpleName()).append(".ID WHERE UserItemCharacterRelation.ID_User = ?");
         //Query resultant amb item:
         //SELECT name FROM useritemcharacterrelation INNER JOIN Item ON useritemcharacterrelation.ID_Item = Item.ID WHERE useritemcharacterrelation.ID_User = ?;
         return sb.toString();
