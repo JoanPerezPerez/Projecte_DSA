@@ -58,7 +58,6 @@
       <th>Imagen</th>
       <th>Nombre</th>
       <th>Precio</th>
-      <th>Acción</th>
     </tr>
     </thead>
     <tbody>
@@ -102,7 +101,6 @@
             <td><img src="${item.item_url}" alt="${item.name}" class="img-thumbnail"></td>
             <td>${item.name}</td>
             <td>$${item.cost.toFixed(2)}</td>
-            <td><button class="btn btn-custom">Vender</button></td>
           </tr>
         `;
         tableBody.insertAdjacentHTML('beforeend', row); // Añade la fila a la tabla
