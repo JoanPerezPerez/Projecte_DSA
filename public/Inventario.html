@@ -85,7 +85,7 @@
   async function loadUserItems() {
     try {
       // Realiza la solicitud GET para obtener los objetos del usuario
-      const response = await fetch(`${apiUrlStore}myItems`);
+      const response = await fetch(`${apiUrlStore}Items`);
 
       if (!response.ok) {
         throw new Error(`Error al obtener los objetos del usuario: ${response.statusText}`);
