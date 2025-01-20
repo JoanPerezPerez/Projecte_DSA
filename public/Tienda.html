@@ -128,7 +128,7 @@
       try {
         // Realiza la solicitud POST para obtener el dinero
         const response = await fetch(`${apiUrlUser}stats`, {
-          method: 'POST',
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -183,7 +183,7 @@
             <td><img src="${item.item_url}" alt="${item.name}" class="img-thumbnail"></td>
             <td>${item.name}</td>
             <td>$${item.cost.toFixed(2)}</td>
-            <td><button class="btn btn-custom" onclick="buyItem('${item.id}')">Comprar</button></td>
+            <td><button class="btn btn-custom" onclick="buyItem('${item.name}')">Comprar</button></td>
           </tr>
           `;
           tableBody.insertAdjacentHTML('beforeend', row); // Añade la fila a la tabla
@@ -196,11 +196,11 @@
     }
 
     // Función para manejar la compra de un item
-    async function buyItem(idItem) {
+    async function buyItem(itemName) {
       mostrarCargando(); // Mostrar el spinner durante la compra
       try {
         // Hacer la compra de un artículo usando el endpoint 
-        const response = await fetch(`${apiUrlStore}buyItem/${idItem}`, {
+        const response = await fetch(`${apiUrlStore}buyItem/${itemName}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
